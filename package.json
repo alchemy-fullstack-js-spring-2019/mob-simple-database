@@ -1,0 +1,26 @@
+{
+  "name": "mob-simple-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "npm run test -- -- watch",
+    "start": "node lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkerchristian/mob-simple-database.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parkerchristian/mob-simple-database/issues"
+  },
+  "homepage": "https://github.com/parkerchristian/mob-simple-database#readme"
+}
