@@ -10,15 +10,15 @@ describe('Store', () => {
   let jsonTwo = null;
   
   let animalDb = null;
-  
-  beforeEach(done => {
-    mkdirp('../animalsdb', done);
 
-    animalDb = new Store('../animalsdb');
+  beforeEach(done => {
+    mkdirp('./animalsdb', done);
+
+    animalDb = new Store('./animalsdb');
 
     jsonOne = {
       name: 'spot',
-      species: 'dog'
+      species: 'dog',
     };
 
     jsonTwo = {
@@ -27,15 +27,18 @@ describe('Store', () => {
     };
   });
 
-  // add afterEach
+  // afterEach(done => {
+
+  // })
 
   it('has create method', done => {
 
     animalDb.create(jsonOne, (err, animal) => {
-      fs.readFile(`../animal-db/${animal._id}`, 'utf8', (err, data) => {
-        if(err) return err;
+      fs.readFile(`./animalsdb/${animal._id}.json`, 'utf8', (err, data) => {
+        // if(err) throw err;
         expect(err).toBeFalsy();
-        expect(data).toEqual(jsonOne);
+        const obj = JSON.parse(data);
+        expect(obj).toEqual(jsonOne);
         done();
       });
     });
