@@ -21,4 +21,16 @@ describe('', () => {
       done();
     });
   });
+
+  it('finds file by id return parsed object', (done) => {
+    const obj = { caret: 'kitty' };
+    store.create(obj, (err, newObj) => {
+      if(err) throw err;
+      store.findById(newObj._id, (err, foundObject) => {
+        if(err) throw err;
+        expect(foundObject).toEqual({ ...obj, _id: newObj._id });
+        done();
+      });
+    });
+  });
 });
