@@ -11,14 +11,21 @@ describe('store database', () => {
         testStore = new Store();
     });
 
-    // afterEach(done => {
-    //     rimraf('./data', done);
-    // });
+    afterEach(done => {
+        rimraf('./data', done);
+    });
 
     it('check create method saves an object with the inputted name', done => {
         testStore.create({ name: 'bob', species: 'sponge' }, (err, savedAnimalWithId) => {
             if(err) throw err;
             expect(savedAnimalWithId.name).toEqual('bob');
+            done();
+        });
+    });
+    it('check create method saves an object with id', done => {
+        testStore.create({ name: 'bob', species: 'sponge' }, (err, savedAnimalWithId) => {
+            if(err) throw err;
+            expect(savedAnimalWithId._id).toEqual(expect.any(String));
             done();
         });
     });
