@@ -1,6 +1,7 @@
 const Store = require('../lib/store');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
+const fs = require('fs');
 
 describe('store database', () => {
 
@@ -10,14 +11,18 @@ describe('store database', () => {
         testStore = new Store();
     });
 
-    afterEach(done => {
-        rimraf('./data', done);
-    });
+    // afterEach(done => {
+    //     rimraf('./data', done);
+    // });
 
-    it('create method makes id property for the object and saves to a file', () => {
+    it('check create method saves an object with the inputted name', done => {
         testStore.create({ name: 'bob', species: 'sponge' }, (err, savedAnimalWithId) => {
             if(err) throw err;
             expect(savedAnimalWithId.name).toEqual('bob');
+            done();
         });
     });
+    //test for id
+    //test for string
+    //
 });
