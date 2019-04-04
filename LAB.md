@@ -7,8 +7,6 @@ Standard repository/dev stuff: `README.md`, `package.json`, `.gitignore`, `.esli
 
 Make sure your `README.md` describes your store API.
 
-**Solo assignment**
-
 ## Doc/Resources
 * [Node fs docs](https://nodejs.org/api/fs.html) - specifically the methods `readdir`, `readFile`, `writeFile`, and `unlink`
 * [Node path docs](https://nodejs.org/api/path.html) - specifically the methods `join` and possibly `resolve`
