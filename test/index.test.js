@@ -55,4 +55,17 @@ describe('', () => {
     });
   });
 
+  it('returns an array of all objects in the directory', () => {
+    const thingone = { ugh: 'fff' };
+    store.create(thingone, (err, newObj) => {
+      if(err) throw err;
+      let id = newObj._id;
+      store.find((err, arrayOfObjects) => {
+        if(err) throw err;
+        expect(arrayOfObjects)
+          .toEqual([{ ...thingone, _id: id }]);
+      });
+    });
+  });
+
 });
