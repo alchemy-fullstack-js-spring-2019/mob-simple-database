@@ -152,13 +152,6 @@ describe('find', () => {
     rimraf('./root2', done);
   });
 
-  it('Does what?', () => {
-    const expected = 5;
-    const result = 5;
-  
-    expect(result).toEqual(expected);
-  });
-
   it('find returns array of objects in the root', done => {
     store.find((err, objArr) => {
       expect(err).toBeFalsy();
