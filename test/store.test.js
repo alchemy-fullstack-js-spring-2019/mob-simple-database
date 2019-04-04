@@ -49,6 +49,7 @@ describe('store database', () => {
             });
         });
     });
+
     describe('findByIdAndRemove function', () => {
         it('find object by id and remove  it once found', done => {
             testStore.create({ name: 'bob', species: 'sponge' }, (err, savedAnimalWithId) => {
@@ -70,6 +71,7 @@ describe('store database', () => {
             });
         });
     });
+    
     describe('find tests', ()=> {
         it('will return array of objects in directory', done => {
             testStore.create({ name: 'bob', species: 'sponge' }, (err) => {
