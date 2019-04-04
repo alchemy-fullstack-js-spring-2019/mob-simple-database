@@ -1,4 +1,3 @@
-const uuid = require('uuid/v4');
 const fs = require('fs');
 const Store = require('../lib/Store');
 const mkdirp = require('mkdirp');
@@ -95,9 +94,13 @@ describe('Store', () => {
         });
       });
     });
-
-
   });
 
-
+  it('returns empty array when no files', done => {   
+    animalDb.findAll((err, objectArray) => {
+      expect(err).toBeFalsy();
+      expect(objectArray).toEqual([]);
+      done();
+    });
+  });
 });
