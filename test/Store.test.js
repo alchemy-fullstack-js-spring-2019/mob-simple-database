@@ -83,4 +83,21 @@ describe('Store', () => {
       done();
     });
   });
+
+  it('find by objects, if objects', done => {
+    animalDb.create(jsonOne, (err, animal) => {
+      animalDb.create(jsonTwo, (err, animal2) => {
+        animalDb.findAll((err, objectArray) => {
+          const testAnimalsPlusId = [{ ...jsonOne, _id: animal._id }, { ...jsonTwo, _id: animal2._id }];
+          expect(err).toBeFalsy();
+          expect(objectArray).toEqual(testAnimalsPlusId);
+          done();
+        });
+      });
+    });
+
+
+  });
+
+
 });
