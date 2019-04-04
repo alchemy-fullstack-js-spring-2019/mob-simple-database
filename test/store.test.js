@@ -16,8 +16,15 @@ describe('Store() thing', () => {
     rimraf(rootDir, done);
   });
   describe('create method', () => {
-    it('check that store is instantiated', () => {
-      expect(db.rootDir).toEqual({});
+    it('checks that obj passed to .create() has uuid', done => {
+      const pets = {
+        name: 'Mister',
+        age: 8
+      };
+      db.create(pets, (err, newPet) => {
+        expect(newPet._id).toEqual(expect.any(String));
+        done(err);
+      });
     });
   });
 });
