@@ -99,4 +99,19 @@ describe('Store Class', () => {
       });
     });
   });
+  
+  it('findByIdAndDelete returns { deleted: 0 } with bad id', done => {
+    const obj = {
+      name: 'guy',
+      age: 13
+    };
+    store.create(obj, err => {
+      expect(err).toBeFalsy();
+      store.findByIdAndDelete('42', (err, removedSuccessObject) => {
+        expect(err.code).toEqual('ENOENT');
+        expect(removedSuccessObject).toEqual({ deleted: 0 });
+        done();
+      });
+    });
+  });
 });
