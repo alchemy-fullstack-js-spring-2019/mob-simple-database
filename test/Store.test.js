@@ -18,7 +18,7 @@ describe('Store', () => {
 
     jsonOne = {
       name: 'spot',
-      species: 'dog',
+      species: 'dog'
     };
 
     jsonTwo = {
@@ -36,9 +36,11 @@ describe('Store', () => {
     animalDb.create(jsonOne, (err, animal) => {
       fs.readFile(`./animalsdb/${animal._id}.json`, 'utf8', (err, data) => {
         // if(err) throw err;
-        expect(err).toBeFalsy();
-        const obj = JSON.parse(data);
-        expect(obj).toEqual(jsonOne);
+        // expect(err).toBeFalsy();
+        // const dataId = data._id;
+        let jsonOnePlusId = { ...jsonOne };
+        jsonOnePlusId._id = animal._id;
+        expect(JSON.parse(data)).toEqual(jsonOnePlusId);
         done();
       });
     });
