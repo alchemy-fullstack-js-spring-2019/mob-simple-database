@@ -11,9 +11,9 @@ describe('store database', () => {
         testStore = new Store('./data');
     });
 
-    // afterEach(done => {
-    //     rimraf('./data', done);
-    // });
+    afterEach(done => {
+        rimraf('./data', done);
+    });
 
     describe('create method', () => {
         it('check create method saves an object with the inputted name', done => {
@@ -47,6 +47,21 @@ describe('store database', () => {
             testStore.findById(123456, (err, objectFromFile) => {
                 expect(objectFromFile).toBeNull();
                 done();
+            });
+        });
+    });
+    describe('findByIdAndRemove function', () => {
+        it('find object by id and remove  it once found', done => {
+            testStore.create({ name: 'bob', species: 'sponge' }, (err, savedAnimalWithId) => {
+                if(err) throw err;
+                testStore.findByIdAndDelete(savedAnimalWithId._id, (err, deletedMessage) => {
+                    if(err) throw err;
+                    expect(deletedMessage).toEqual({ deleted: 1 });
+                    testStore.findById(savedAnimalWithId._id, (err, objectFromFile) => {
+                        expect(objectFromFile).toBeNull();
+                        done();
+                    });
+                });
             });
         });
     });
