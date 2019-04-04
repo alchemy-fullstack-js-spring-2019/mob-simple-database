@@ -8,7 +8,7 @@ describe('store database', () => {
     let testStore = null;
     beforeEach(done => {
         mkdirp('./data', done);
-        testStore = new Store();
+        testStore = new Store('./data');
     });
 
     // afterEach(done => {
@@ -41,6 +41,12 @@ describe('store database', () => {
                     expect(objectFromFile).toEqual(savedAnimalWithId);
                     done();
                 });
+            });
+        });
+        it('returns null if no file matches given id', done => {
+            testStore.findById(123456, (err, objectFromFile) => {
+                expect(objectFromFile).toBeNull();
+                done();
             });
         });
     });
