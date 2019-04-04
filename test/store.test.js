@@ -21,7 +21,6 @@ describe('Store Class', () => {
   });
 
   it('has property path', () => {
-    
     expect(store.rootDirectory).toEqual(rootDirectory);
   });
 
@@ -53,6 +52,7 @@ describe('Store Class', () => {
       });
     });
   });
+
   it('findById takes an id and has a callback with error and obj from file', done => {
     const obj = {
       name: 'guy',
@@ -68,6 +68,7 @@ describe('Store Class', () => {
       });
     });
   });
+
   it('returns null if bad id', done => {
     const obj = {
       name: 'guy',
@@ -79,6 +80,21 @@ describe('Store Class', () => {
       store.findById('42', (err, objFromFile) => {
         expect(err).toBeTruthy();
         expect(objFromFile).toEqual(null);
+        done();
+      });
+    });
+  });
+
+  it('findByIdAndDelete takes id and returns callback with error and success object', done => {
+    const obj = {
+      name: 'guy',
+      age: 13
+    };
+    store.create(obj, (err, objSaved) => {
+      expect(err).toBeFalsy();
+      store.findByIdAndDelete(objSaved._id, (err, removedSuccessObject) => {
+        expect(err).toBeFalsy();
+        expect(removedSuccessObject).toEqual({ deleted: 1 });
         done();
       });
     });
