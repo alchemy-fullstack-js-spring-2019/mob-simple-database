@@ -33,10 +33,6 @@ describe('Store', () => {
         expect(data).toEqual(jsonOne);
         done();
       });
-
     });
-
   });
-
-
 });
