@@ -1,16 +1,21 @@
 const uuid = require('uuid/v4');
 const fs = require('fs');
 const Store = require('../lib/Store');
+const mkdirp = require('mkdirp');
+const rimraf = require('rimraf');
 
 
 describe('Store', () => {
   let jsonOne = null;
   let jsonTwo = null;
+  
   let animalDb = null;
+  
+  beforeEach(done => {
+    mkdirp('../animalsdb', done);
 
-  beforeEach(() => {
-    animalDb = new Store('../animal-db');
-    
+    animalDb = new Store('../animalsdb');
+
     jsonOne = {
       name: 'spot',
       species: 'dog'
