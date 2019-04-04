@@ -27,17 +27,15 @@ describe('Store', () => {
     };
   });
 
-  // afterEach(done => {
-
-  // })
+  afterEach(done => {
+    rimraf('./animalsdb', done);
+  });
 
   it('has create method', done => {
 
     animalDb.create(jsonOne, (err, animal) => {
       fs.readFile(`./animalsdb/${animal._id}.json`, 'utf8', (err, data) => {
-        // if(err) throw err;
-        // expect(err).toBeFalsy();
-        // const dataId = data._id;
+        expect(err).toBeFalsy();
         let jsonOnePlusId = { ...jsonOne };
         jsonOnePlusId._id = animal._id;
         expect(JSON.parse(data)).toEqual(jsonOnePlusId);
