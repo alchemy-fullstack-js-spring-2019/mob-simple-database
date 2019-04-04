@@ -1,7 +1,6 @@
 const Store = require('../lib/store');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
-const fs = require('fs');
 
 describe('store database', () => {
 
@@ -61,6 +60,24 @@ describe('store database', () => {
                         expect(objectFromFile).toBeNull();
                         done();
                     });
+                });
+            });
+        });
+        it('returns { deleted: 0 } if file didnt exist to delete', done => {
+            testStore.findByIdAndDelete('wrongid', (err, deletedMessage) => {
+                expect(deletedMessage).toEqual({ deleted: 0 });
+                done();
+            });
+        });
+    });
+    describe('find tests', ()=> {
+        it('will return array of objects in directory', done => {
+            testStore.create({ name: 'bob', species: 'sponge' }, (err) => {
+                if(err) throw err;
+                testStore.find((err, array) => {
+                    if(err) throw err;
+                    expect(array).toEqual([]);
+                    done();
                 });
             });
         });
