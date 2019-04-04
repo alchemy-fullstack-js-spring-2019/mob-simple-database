@@ -29,5 +29,19 @@ describe('Store', () => {
       done();
     });
   });
+
+  it('find object by id', done => {
+    const snake = {
+      type: 'cobra'
+    };
+
+    store.create(snake, (err, createdSnake) => {
+      store.findById(createdSnake._id, (err, foundSnake) => {
+        expect(err).toBeFalsy();
+        expect(foundSnake).toEqual(createdSnake);
+        done();
+      });
+    });
+  });
   
 });
