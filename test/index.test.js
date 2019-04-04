@@ -39,23 +39,20 @@ describe('', () => {
       if(err) throw err;
       store.findByIdAndDelete(newObj._id, (err, removedObject) => {
         if(err) return removedObject;
-        expect(removedObject).toEqual({ deleted: 1 });
+        expect(removedObject).toEqual({ deleted: true });
         done();
       });
     });
-
   });
 
   it('throw error object if no file', (done) => {
-    store.create({ ugh: 'k' }, (err, newObj) => {
+    store.create({ ugh: 'k' }, (err) => {
       if(err) throw err;
       store.findByIdAndDelete(555, (err, removedObject) => {
-        if(err) return removedObject;
-        expect(removedObject).toEqual({ deleted: 0 });
+        if(err) expect(removedObject).toEqual({ deleted: false });
         done();
       });
     });
-
   });
 
 });
