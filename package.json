@@ -21,7 +21,7 @@
   "homepage": "https://github.com/T-Tommy/mob-simple-database#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
-    "jest": "^24.7.0"
+    "jest": "^24.7.1"
   },
   "dependencies": {
     "mkdirp": "^0.5.1",
