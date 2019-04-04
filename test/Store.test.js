@@ -43,4 +43,14 @@ describe('Store', () => {
       });
     });
   });
+
+  it('finds a JSON file by id and returns json', done => {
+    animalDb.create(jsonOne, (err, animal) => {
+      animalDb.findById(animal._id, (err, animalJsonObject) => {
+        expect(err).toBeFalsy();
+        expect(animal).toEqual(JSON.parse(animalJsonObject));
+        done();
+      });
+    });
+  });
 });
