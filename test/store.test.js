@@ -7,15 +7,21 @@ const path = require('path');
 describe('Store Class', () => {
   const rootDirectory = './root';
   const options = { encoding: 'utf8' };
+  let store = null;
+
   beforeEach(done => {
-    mkdirp(rootDirectory, done);
+    mkdirp(rootDirectory, () => {
+      store = new Store(rootDirectory);
+      done();
+    });
+
   });
   afterEach(done => {
     rimraf(rootDirectory, done);
   });
 
   it('has property path', () => {
-    const store = new Store(rootDirectory);
+    
     expect(store.rootDirectory).toEqual(rootDirectory);
   });
 
@@ -24,7 +30,6 @@ describe('Store Class', () => {
       name: 'guy',
       age: 13
     };
-    const store = new Store(rootDirectory);
     store.create(obj, (err, objSaved) => {
       expect(err).toBeFalsy();
       expect(objSaved.name).toEqual(obj.name);
@@ -38,13 +43,42 @@ describe('Store Class', () => {
       name: 'guy',
       age: 13
     };
-    const store = new Store(rootDirectory);
     store.create(obj, (err, objSaved) => {
       expect(err).toBeFalsy();
       const filePath = path.join(rootDirectory, objSaved._id);
       fs.readFile(filePath, options, (err, data) => {
         expect(err).toBeFalsy();
         expect(data).toEqual(JSON.stringify(objSaved));
+        done();
+      });
+    });
+  });
+  it('findById takes an id and has a callback with error and obj from file', done => {
+    const obj = {
+      name: 'guy',
+      age: 13
+    };
+    store.create(obj, (err, objSaved) => {
+      expect(err).toBeFalsy();
+      
+      store.findById(objSaved._id, (err, objFromFile) => {
+        expect(err).toBeFalsy();
+        expect(objFromFile).toEqual(objSaved);
+        done();
+      });
+    });
+  });
+  it('returns null if bad id', done => {
+    const obj = {
+      name: 'guy',
+      age: 13
+    };
+    store.create(obj, err => {
+      expect(err).toBeFalsy();
+      
+      store.findById('42', (err, objFromFile) => {
+        expect(err).toBeTruthy();
+        expect(objFromFile).toEqual(null);
         done();
       });
     });
