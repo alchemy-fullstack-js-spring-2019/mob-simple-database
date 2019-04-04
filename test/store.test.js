@@ -15,6 +15,13 @@ describe('Store() thing', () => {
   afterEach(done => {
     rimraf(rootDir, done);
   });
+  beforeEach(done => {
+    const pets = {
+      name: 'Mister',
+      age: 8
+    };
+    db.create(pets, done);
+  });
   describe('create method', () => {
     it('checks that obj passed to .create() has uuid', done => {
       const pets = {
@@ -24,6 +31,20 @@ describe('Store() thing', () => {
       db.create(pets, (err, newPet) => {
         expect(newPet._id).toEqual(expect.any(String));
         done(err);
+      });
+    });
+  });
+  describe('find by ID', () => {
+    it('finds an obj by id', () => {
+      const pets = {
+        name: 'Mister',
+        age: 8
+      };
+      db.create(pets, (err, newPet) => {
+        db.findById(newPet._id, (err, objectFromFile) => {
+          if(err) throw err;
+          expect(newPet).toEqual(objectFromFile);
+        });
       });
     });
   });
