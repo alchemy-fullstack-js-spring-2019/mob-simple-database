@@ -3,7 +3,6 @@ const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
 
 describe('store database', () => {
-
     let testStore = null;
     beforeEach(done => {
         mkdirp('./data', done);
@@ -22,6 +21,7 @@ describe('store database', () => {
                 done();
             });
         });
+
         it('check create method saves an object with id', done => {
             testStore.create({ name: 'bob', species: 'sponge' }, (err, savedAnimalWithId) => {
                 if(err) throw err;
@@ -42,6 +42,7 @@ describe('store database', () => {
                 });
             });
         });
+
         it('returns null if no file matches given id', done => {
             testStore.findById(123456, (err, objectFromFile) => {
                 expect(objectFromFile).toBeNull();
@@ -64,6 +65,7 @@ describe('store database', () => {
                 });
             });
         });
+        
         it('returns { deleted: 0 } if file didnt exist to delete', done => {
             testStore.findByIdAndDelete('wrongid', (err, deletedMessage) => {
                 expect(deletedMessage).toEqual({ deleted: 0 });
@@ -71,7 +73,7 @@ describe('store database', () => {
             });
         });
     });
-    
+
     describe('find tests', ()=> {
         it('will return array of objects in directory', done => {
             testStore.create({ name: 'bob', species: 'sponge' }, (err) => {
