@@ -1,10 +1,10 @@
 {
   "name": "mob-simple-database",
   "version": "1.0.0",
-  "description": "",
+  "description": "this will have information, later",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest",
     "test:watch": "npm run test -- --watch",
     "start": "node lib/index.js"
   },
@@ -27,5 +27,9 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3",
     "uuid": "^3.3.2"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }
