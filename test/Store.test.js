@@ -61,4 +61,26 @@ describe('Store', () => {
       done();
     });
   });
+
+  it('finds by id and deletes', done => {
+    animalDb.create(jsonOne, (err, animal) => {
+      animalDb.deleteById(animal._id, (err, removedObject) => {
+        expect(err).toBeFalsy();
+        expect(removedObject).toEqual({ deleted: 1 });
+        animalDb.findById(animal._id, (err, animalJsonObject) => {
+          expect(err).toBeTruthy();
+          expect(animalJsonObject).toEqual(null);
+          done();
+        });
+      });
+    });
+  });
+
+  it('cannot find id, won\'t delete anything', done => {
+    animalDb.deleteById(143243, (err, removedObject) => {
+      expect(err).toBeTruthy();
+      expect(removedObject).toEqual({ deleted: 0 });
+      done();
+    });
+  });
 });
