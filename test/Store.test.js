@@ -48,9 +48,17 @@ describe('Store', () => {
     animalDb.create(jsonOne, (err, animal) => {
       animalDb.findById(animal._id, (err, animalJsonObject) => {
         expect(err).toBeFalsy();
-        expect(animal).toEqual(JSON.parse(animalJsonObject));
+        expect(animal).toEqual(animalJsonObject);
         done();
       });
+    });
+  });
+  
+  it('finds a JSON file by bad id fails', done => {
+    animalDb.findById(11111, (err, animalJsonObject) => {
+      expect(err).toBeTruthy();
+      expect(animalJsonObject).toEqual(null);
+      done();
     });
   });
 });
