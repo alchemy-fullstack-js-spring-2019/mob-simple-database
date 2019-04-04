@@ -103,20 +103,20 @@ describe('Store Class', () => {
     });
   });
   
-  // it('findByIdAndDelete returns { deleted: 0 } with bad id', done => {
-  //   const obj = {
-  //     name: 'guy',
-  //     age: 13
-  //   };
-  //   store.create(obj, err => {
-  //     expect(err).toBeFalsy();
-  //     store.findByIdAndDelete('42', (err, removedSuccessObject) => {
-  //       expect(err.code).toEqual('ENOENT');
-  //       expect(removedSuccessObject).toEqual({ deleted: 0 });
-  //       done();
-  //     });
-  //   });
-  // });
+  it('findByIdAndDelete returns { deleted: 0 } with bad id', done => {
+    const obj = {
+      name: 'guy',
+      age: 13
+    };
+    store.create(obj, err => {
+      expect(err).toBeFalsy();
+      store.findByIdAndDelete('42', (err, removedSuccessObject) => {
+        expect(err.code).toEqual('ENOENT');
+        expect(removedSuccessObject).toEqual({ deleted: 0 });
+        done();
+      });
+    });
+  });
   
   it('find returns empty array', done => {
     store.find((err, objArr) => {
@@ -127,44 +127,44 @@ describe('Store Class', () => {
   });
 });
 
-// describe('find', () => {
+describe('find', () => {
 
-//   const origArray = [
-//     { something: 'whatever' },
-//     { something: 'stuff' }
-//   ];
+  const origArray = [
+    { something: 'whatever' },
+    { something: 'stuff' }
+  ];
 
-//   beforeEach(done => {
-//     mkdirp('./root2', () => {
-//       store = new Store('./root2');
+  beforeEach(done => {
+    mkdirp('./root2', () => {
+      store = new Store('./root2');
       
-//       let count = 0;
-//       origArray.forEach((obj) => {
-//         store.create(obj, () => {
-//           count++;
-//           if(count >= origArray.length) done();
-//         });
-//       });
-//     });
-//   });
+      let count = 0;
+      origArray.forEach((obj) => {
+        store.create(obj, () => {
+          count++;
+          if(count >= origArray.length) done();
+        });
+      });
+    });
+  });
 
-//   afterEach(done => {
-//     rimraf('./root2', done);
-//   });
+  afterEach(done => {
+    rimraf('./root2', done);
+  });
 
-//   it('Does what?', () => {
-//     const expected = 5;
-//     const result = 5;
+  it('Does what?', () => {
+    const expected = 5;
+    const result = 5;
   
-//     expect(result).toEqual(expected);
-//   });
+    expect(result).toEqual(expected);
+  });
 
-//   it('find returns array of objects in the root', done => {
-//     store.find((err, objArr) => {
-//       expect(err).toBeFalsy();
-//       expect(objArr.length).toEqual(origArray.length);
-//       expect(objArr[0].something).toEqual(origArray[0].something);
-//       done();
-//     });
-//   });
-// });
+  it('find returns array of objects in the root', done => {
+    store.find((err, objArr) => {
+      expect(err).toBeFalsy();
+      expect(objArr.length).toEqual(origArray.length);
+      expect(objArr[0].something).toBeTruthy();
+      done();
+    });
+  });
+});
