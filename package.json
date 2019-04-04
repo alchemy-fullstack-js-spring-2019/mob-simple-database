@@ -1,0 +1,36 @@
+{
+  "name": "mob-simple-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "npm run test -- --watch",
+    "start": "node lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maybeemily/mob-simple-database.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maybeemily/mob-simple-database/issues"
+  },
+  "homepage": "https://github.com/maybeemily/mob-simple-database#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "jest": "^24.7.0"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.3",
+    "short-id": "0.1.0-1",
+    "uuid": "^3.3.2"
+  }
+}
